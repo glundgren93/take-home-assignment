@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styles from "./App.module.css";
-import logo from "./assets/logo.svg";
 
 import TrackRow from "./components/TrackRow";
+import Navbar from "./components/Navbar";
 import AudioPlayer from "./components/AudioPlayer";
+import PlaylistManager from "./components/PlaylistManager";
+import { PlaylistsProvider } from "./context/playlists-context";
 
 function App() {
   const [tracks, setTracks] = useState([]);
@@ -18,27 +21,24 @@ function App() {
   const handlePlay = (track) => setCurrentTrack(track);
 
   return (
-    <>
-      <main className={styles.app}>
-        <nav>
-          <img src={logo} className={styles.logo} alt="Logo" />
-          <ul className={styles.menu}>
-            <li>
-              <a href="#" className={styles.active}>
-                Tracks
-              </a>
-            </li>
-            <li>
-              <a href="#">Playlists</a>
-            </li>
-          </ul>
-        </nav>
-        {tracks.map((track, ix) => (
-          <TrackRow key={ix} track={track} handlePlay={handlePlay} />
-        ))}
-      </main>
-      {currentTrack && <AudioPlayer track={currentTrack} />}
-    </>
+    <Router>
+      <PlaylistsProvider>
+        <main className={styles.app}>
+          <Route component={Navbar} />
+          <Switch>
+            <Route exact path="/">
+              {tracks.map((track, ix) => (
+                <TrackRow key={ix} track={track} handlePlay={handlePlay} />
+              ))}
+            </Route>
+            <Route path="/playlists">
+              <PlaylistManager handlePlay={handlePlay} />
+            </Route>
+          </Switch>
+        </main>
+        {currentTrack && <AudioPlayer track={currentTrack} />}
+      </PlaylistsProvider>
+    </Router>
   );
 }
 
