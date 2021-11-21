@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import logo from "../assets/logo.svg";
-import { PLAYLIST_CONTEXT } from "../constants";
+import logo from "../../assets/logo.svg";
+import { PLAYLIST_CONTEXT } from "../../constants";
 
-import { usePlaylists } from "../context/playlists-context";
+import { usePlaylists } from "../../context/playlists-context";
 
 const Navbar = () => {
   const { dispatch } = usePlaylists();

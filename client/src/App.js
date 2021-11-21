@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styles from "./App.module.css";
 
 import TrackRow from "./components/tracks/TrackRow";
-import Navbar from "./components/Navbar";
-import AudioPlayer from "./components/AudioPlayer";
+import Navbar from "./components/navbar/Navbar";
+import AudioPlayer from "./components/audioPlayer/AudioPlayer";
 import PlaylistManager from "./components/playlist/PlaylistManager";
 import Playlist from "./components/playlist/Playlist";
 import { PlaylistsProvider } from "./context/playlists-context";
