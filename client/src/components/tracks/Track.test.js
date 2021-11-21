@@ -1,5 +1,22 @@
 import { render, screen, act } from "@testing-library/react";
 import TrackRow from "./TrackRow";
+import TrackContextMenu from "./TrackContextMenu";
+
+import { unmountComponentAtNode } from "react-dom";
+
+let container = null;
+beforeEach(() => {
+  // setup a DOM element as a render target
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
 
 jest.mock("./TrackContextMenu", () => {
   return function DummyTrackContextMenu(props) {

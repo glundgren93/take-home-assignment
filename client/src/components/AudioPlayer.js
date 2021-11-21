@@ -47,6 +47,7 @@ function AudioPlayer({ track }) {
       <audio src={track.audio} ref={audioRef} />
       <div className={styles.audioPlayer}>
         <button
+          data-testid="playback-button"
           className={styles.togglePlaybackButton}
           onClick={handleTogglePlaybackClick}
         >
@@ -57,6 +58,7 @@ function AudioPlayer({ track }) {
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              data-testid="pause"
             >
               <path
                 fillRule="evenodd"
@@ -72,6 +74,7 @@ function AudioPlayer({ track }) {
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              data-testid="play"
             >
               <path d="M20 12L8 5V19L20 12Z" fill="#000" />
             </svg>
