@@ -1,8 +1,7 @@
 import React from "react";
-import styles from "./TrackRow.module.css";
 import { contextMenu } from "react-contexify";
-import "react-contexify/dist/ReactContexify.css";
 
+import styles from "./TrackRow.module.css";
 import TrackContextMenu from "./TrackContextMenu";
 
 function TrackRow({ track, handlePlay }) {

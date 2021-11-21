@@ -22,7 +22,7 @@ function playlistsReducer(state, action) {
     }
     case "delete": {
       const filteredCollection = state.playlists.filter(
-        (item) => item.id !== action.id
+        (item) => item.id !== action.playlistId
       );
       return { playlists: filteredCollection };
     }

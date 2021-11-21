@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styles from "./App.module.css";
 
-import TrackRow from "./components/TrackRow";
+import TrackRow from "./components/tracks/TrackRow";
 import Navbar from "./components/Navbar";
 import AudioPlayer from "./components/AudioPlayer";
-import PlaylistManager from "./components/PlaylistManager";
+import PlaylistManager from "./components/playlist/PlaylistManager";
 import { PlaylistsProvider } from "./context/playlists-context";
 
 function App() {

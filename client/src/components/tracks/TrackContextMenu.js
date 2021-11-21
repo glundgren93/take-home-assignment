@@ -1,13 +1,14 @@
 import { Menu, Item, Submenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
-import { usePlaylists } from "../context/playlists-context";
+
+import { usePlaylists } from "../../context/playlists-context";
 
 function TrackContextMenu({ track }) {
   const {
     state: { playlists },
     dispatch,
   } = usePlaylists();
-  const handleyCreatePlaylist = () => {
+  const handleCreatePlaylist = () => {
     dispatch({
       type: "create",
     });
@@ -30,7 +31,7 @@ function TrackContextMenu({ track }) {
   return (
     <div>
       <Menu id={track.id} animation="fade" theme="dark">
-        <Item onClick={handleyCreatePlaylist}>Create Playlist</Item>
+        <Item onClick={handleCreatePlaylist}>Create playlist</Item>
         <Submenu disabled={playlists.length === 0} label="Add to playlist">
           {playlists.map((playlist, ix) => (
             <Item
