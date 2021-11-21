@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import logo from "../assets/logo.svg";
+import { PLAYLIST_CONTEXT } from "../constants";
 
 import { usePlaylists } from "../context/playlists-context";
 
@@ -18,15 +19,17 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName={styles.active} to="/playlists">
+          <NavLink exact activeClassName={styles.active} to="/playlists/">
             Playlists
           </NavLink>
         </li>
         <li
           className={styles.control}
-          onClick={() => dispatch({ type: "create" })}
+          onClick={() => {
+            dispatch({ type: PLAYLIST_CONTEXT.CREATE_PLAYLIST });
+          }}
         >
-          + Create Playlist
+          Create Playlist
         </li>
       </ul>
     </nav>

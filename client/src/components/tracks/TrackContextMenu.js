@@ -1,6 +1,7 @@
 import { Menu, Item, Submenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 
+import { PLAYLIST_CONTEXT } from "../../constants";
 import { usePlaylists } from "../../context/playlists-context";
 
 function TrackContextMenu({ track }) {
@@ -8,9 +9,11 @@ function TrackContextMenu({ track }) {
     state: { playlists },
     dispatch,
   } = usePlaylists();
+
+  //TODO: create single method for playlist creation to be used everywhere
   const handleCreatePlaylist = () => {
     dispatch({
-      type: "create",
+      type: PLAYLIST_CONTEXT.CREATE_PLAYLIST,
     });
 
     //TODO: give feedback
@@ -20,7 +23,7 @@ function TrackContextMenu({ track }) {
     //TODO: check if playlist has track
 
     dispatch({
-      type: "addTrack",
+      type: PLAYLIST_CONTEXT.ADD_TRACK,
       track: props.track,
       playlistId: props.playlist.id,
     });

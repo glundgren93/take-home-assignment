@@ -77,6 +77,11 @@ function AudioPlayer({ track }) {
             </svg>
           )}
         </button>
+        <img
+          src={track.cover_art}
+          alt={track.Ttile}
+          className={styles.trackCoverArt}
+        ></img>
         <div className={styles.trackInfo}>
           <div className={styles.trackTitle}>{track.title}</div>
           <div className={styles.trackArtist}>

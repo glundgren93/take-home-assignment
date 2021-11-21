@@ -1,44 +1,55 @@
 import * as React from "react";
+import { PLAYLIST_CONTEXT } from "../constants";
 
 const initialState = {
   playlists: [],
+  currentPlaylist: {},
 };
 
 const PlaylistsContext = React.createContext();
 
 function playlistsReducer(state, action) {
   switch (action.type) {
-    case "create": {
+    case PLAYLIST_CONTEXT.GET_PLAYLIST_BY_ID: {
+      const filteredPlaylist = state.playlists.find(
+        (item) => item.id.toString() === action.playlistId
+      );
+      return { playlists: state.playlists, currentPlaylist: filteredPlaylist };
+    }
+    case PLAYLIST_CONTEXT.CREATE_PLAYLIST: {
+      const createdPlaylist = {
+        id: Date.now(),
+        name: `My playlist #${state.playlists.length + 1}`,
+        tracks: [],
+      };
+
       return {
-        playlists: [
-          ...state.playlists,
-          {
-            id: Date.now(),
-            name: `My playlist #${state.playlists.length + 1}`,
-            tracks: [],
-          },
-        ],
+        playlists: [...state.playlists, createdPlaylist],
+        currentPlaylist: createdPlaylist,
       };
     }
-    case "delete": {
-      const filteredCollection = state.playlists.filter(
+    case PLAYLIST_CONTEXT.DELETE_PLAYLIST: {
+      const filteredPlaylist = state.playlists.filter(
         (item) => item.id !== action.playlistId
       );
-      return { playlists: filteredCollection };
+      return {
+        playlists: filteredPlaylist,
+        currentPlaylist: state.currentPlaylist,
+      };
     }
-    case "addTrack": {
-      const currentPlaylist = state.playlists.map((item) => {
+    case PLAYLIST_CONTEXT.ADD_TRACK: {
+      const playlists = state.playlists.map((item) => {
         if (item.id === action.playlistId) {
           return { ...item, tracks: [...item.tracks, action.track] };
         }
         return item;
       });
 
-      return { playlists: currentPlaylist };
+      return { playlists, currentPlaylist: state.currentPlaylist };
     }
 
-    case "removeTrack": {
-      const currentPlaylist = state.playlists.map((item) => {
+    case PLAYLIST_CONTEXT.REMOVE_TRACK: {
+      const playlists = state.playlists.map((item) => {
         if (item.id === action.playlistId) {
           return {
             ...item,
@@ -48,7 +59,7 @@ function playlistsReducer(state, action) {
         return item;
       });
 
-      return { playlists: currentPlaylist };
+      return { playlists, currentPlaylist: state.currentPlaylist };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -58,8 +69,7 @@ function playlistsReducer(state, action) {
 
 function PlaylistsProvider({ children }) {
   const [state, dispatch] = React.useReducer(playlistsReducer, initialState);
-  // NOTE: you *might* need to memoize this value
-  // Learn more in http://kcd.im/optimize-context
+
   const value = { state, dispatch };
   return (
     <PlaylistsContext.Provider value={value}>

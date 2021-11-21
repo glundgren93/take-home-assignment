@@ -19,9 +19,17 @@ function TrackRow({ track, handlePlay }) {
     });
   };
 
-  return (
-    <div className={styles.trackRow} onContextMenu={(e) => handleEvent(e)}>
-      <button className={styles.trackPlay} onClick={() => handlePlay(track)}>
+  return track ? (
+    <div
+      data-testid="track"
+      className={styles.trackRow}
+      onContextMenu={(e) => handleEvent(e)}
+    >
+      <button
+        data-testid="play"
+        className={styles.trackPlay}
+        onClick={() => handlePlay(track)}
+      >
         <svg
           width="24"
           height="24"
@@ -45,6 +53,8 @@ function TrackRow({ track, handlePlay }) {
       </div>
       <TrackContextMenu track={track} />
     </div>
+  ) : (
+    "No track found"
   );
 }
 

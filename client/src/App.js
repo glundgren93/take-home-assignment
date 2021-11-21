@@ -6,6 +6,7 @@ import TrackRow from "./components/tracks/TrackRow";
 import Navbar from "./components/Navbar";
 import AudioPlayer from "./components/AudioPlayer";
 import PlaylistManager from "./components/playlist/PlaylistManager";
+import Playlist from "./components/playlist/Playlist";
 import { PlaylistsProvider } from "./context/playlists-context";
 
 function App() {
@@ -31,8 +32,11 @@ function App() {
                 <TrackRow key={ix} track={track} handlePlay={handlePlay} />
               ))}
             </Route>
-            <Route path="/playlists">
+            <Route exact path="/playlists/">
               <PlaylistManager handlePlay={handlePlay} />
+            </Route>
+            <Route path="/playlists/:playlistId">
+              <Playlist handlePlay={handlePlay} />
             </Route>
           </Switch>
         </main>
