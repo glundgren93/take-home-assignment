@@ -1,4 +1,6 @@
 import * as React from "react";
+import { toast } from "react-toastify";
+
 import { PLAYLIST_CONTEXT } from "../constants";
 
 const initialState = {
@@ -23,6 +25,8 @@ function playlistsReducer(state, action) {
         tracks: [],
       };
 
+      toast(`Playlist created.`);
+
       return {
         playlists: [...state.playlists, createdPlaylist],
         currentPlaylist: createdPlaylist,
@@ -30,8 +34,11 @@ function playlistsReducer(state, action) {
     }
     case PLAYLIST_CONTEXT.DELETE_PLAYLIST: {
       const filteredPlaylist = state.playlists.filter(
-        (item) => item.id !== action.playlistId
+        (item) => item.id !== action.playlist.id
       );
+
+      toast(`Playlist ${action.playlist.name} was deleted`);
+
       return {
         playlists: filteredPlaylist,
         currentPlaylist: state.currentPlaylist,
@@ -39,11 +46,13 @@ function playlistsReducer(state, action) {
     }
     case PLAYLIST_CONTEXT.ADD_TRACK: {
       const playlists = state.playlists.map((item) => {
-        if (item.id === action.playlistId) {
+        if (item.id === action.playlist.id) {
           return { ...item, tracks: [...item.tracks, action.track] };
         }
         return item;
       });
+
+      toast(`Track ${action.track.title} added to ${action.playlist.name}.`);
 
       return { playlists, currentPlaylist: state.currentPlaylist };
     }
@@ -58,6 +67,8 @@ function playlistsReducer(state, action) {
         }
         return item;
       });
+
+      toast(`Track ${action.track.title} removed from ${action.playlist.name}.`);
 
       return { playlists, currentPlaylist: state.currentPlaylist };
     }

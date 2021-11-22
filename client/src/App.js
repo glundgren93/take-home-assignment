@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import styles from "./App.module.css";
 
 import TrackRow from "./components/tracks/TrackRow";
@@ -41,6 +44,7 @@ function App() {
           </Switch>
         </main>
         {currentTrack && <AudioPlayer track={currentTrack} />}
+        <ToastContainer position="top-right" />
       </PlaylistsProvider>
     </Router>
   );

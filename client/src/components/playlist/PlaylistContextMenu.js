@@ -16,10 +16,8 @@ function PlaylistContextMenu({ handlePlay, playlist }) {
 
     dispatch({
       type: PLAYLIST_CONTEXT.DELETE_PLAYLIST,
-      playlistId: playlist.id,
+      playlist,
     });
-
-    //TODO: give feedback
   };
 
   return (

@@ -15,8 +15,6 @@ function TrackContextMenu({ track }) {
     dispatch({
       type: PLAYLIST_CONTEXT.CREATE_PLAYLIST,
     });
-
-    //TODO: give feedback
   };
 
   const handleAddToPlaylist = ({ props }) => {
@@ -25,10 +23,8 @@ function TrackContextMenu({ track }) {
     dispatch({
       type: PLAYLIST_CONTEXT.ADD_TRACK,
       track: props.track,
-      playlistId: props.playlist.id,
+      playlist: props.playlist,
     });
-
-    //TODO: give feedback
   };
 
   return (
