@@ -1,5 +1,4 @@
 import * as React from "react";
-import { toast } from "react-toastify";
 
 import { PLAYLIST_CONTEXT } from "../constants";
 
@@ -14,18 +13,16 @@ function playlistsReducer(state, action) {
   switch (action.type) {
     case PLAYLIST_CONTEXT.GET_PLAYLIST_BY_ID: {
       const filteredPlaylist = state.playlists.find(
-        (item) => item.id.toString() === action.playlistId
+        (item) => item.id === action.playlistId
       );
       return { playlists: state.playlists, currentPlaylist: filteredPlaylist };
     }
     case PLAYLIST_CONTEXT.CREATE_PLAYLIST: {
       const createdPlaylist = {
-        id: Date.now(),
+        id: Date.now().toString(),
         name: `My playlist #${state.playlists.length + 1}`,
         tracks: [],
       };
-
-      toast(`Playlist created.`);
 
       return {
         playlists: [...state.playlists, createdPlaylist],
@@ -36,8 +33,6 @@ function playlistsReducer(state, action) {
       const filteredPlaylist = state.playlists.filter(
         (item) => item.id !== action.playlist.id
       );
-
-      toast(`Playlist ${action.playlist.name} was deleted`);
 
       return {
         playlists: filteredPlaylist,
@@ -51,8 +46,6 @@ function playlistsReducer(state, action) {
         }
         return item;
       });
-
-      toast(`Track ${action.track.title} added to ${action.playlist.name}.`);
 
       return { playlists, currentPlaylist: state.currentPlaylist };
     }
@@ -68,9 +61,11 @@ function playlistsReducer(state, action) {
         return item;
       });
 
-      toast(`Track ${action.track.title} removed from ${action.playlist.name}.`);
+      const filteredPlaylist = playlists.find(
+        (item) => item.id === action.playlistId
+      );
 
-      return { playlists, currentPlaylist: state.currentPlaylist };
+      return { playlists, currentPlaylist: filteredPlaylist };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

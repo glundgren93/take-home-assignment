@@ -25,10 +25,15 @@
 
 .menu .control {
   cursor: pointer;
+  margin-left: auto;
 }
 
 .menu a.active,
 .menu li:hover {
   color: #fff;
   border-bottom: 2px solid #009de0;
+}
+
+.createPlaylistIcon {
+  vertical-align: middle;
 }

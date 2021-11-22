@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { Menu, Item, Submenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 
@@ -15,6 +16,8 @@ function TrackContextMenu({ track }) {
     dispatch({
       type: PLAYLIST_CONTEXT.CREATE_PLAYLIST,
     });
+
+    toast(`Playlist created.`);
   };
 
   const handleAddToPlaylist = ({ props }) => {
@@ -25,6 +28,8 @@ function TrackContextMenu({ track }) {
       track: props.track,
       playlist: props.playlist,
     });
+
+    toast(`Track ${props.track.title} added to ${props.playlist.name}.`);
   };
 
   return (

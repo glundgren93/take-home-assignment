@@ -1,0 +1,16 @@
+.trackItem {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+
+.trackDeleteItem {
+  cursor: pointer;
+}
+
+.playlistName {
+  padding: 1rem 0 ;
+  border-bottom: 1px solid #333;
+}
