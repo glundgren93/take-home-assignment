@@ -21,15 +21,21 @@ function TrackContextMenu({ track }) {
   };
 
   const handleAddToPlaylist = ({ props }) => {
-    //TODO: check if playlist has track
+    let feedbackMsg;
+    // only add unique tracks
+    if (!props.playlist.tracks.includes(props.track)) {
+      dispatch({
+        type: PLAYLIST_CONTEXT.ADD_TRACK,
+        track: props.track,
+        playlist: props.playlist,
+      });
 
-    dispatch({
-      type: PLAYLIST_CONTEXT.ADD_TRACK,
-      track: props.track,
-      playlist: props.playlist,
-    });
+      feedbackMsg = `Track ${props.track.title} added to ${props.playlist.name}.`;
+    } else {
+      feedbackMsg = `${props.track.title} is already on ${props.playlist.name}`;
+    }
 
-    toast(`Track ${props.track.title} added to ${props.playlist.name}.`);
+    toast(feedbackMsg);
   };
 
   return (
